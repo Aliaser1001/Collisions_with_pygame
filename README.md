@@ -1,5 +1,5 @@
 # Collisions_with_pygame
-Simulation of colliding objects, visualized with pyjama
+Simulation of colliding objects, visualized with pygame
 
 
 Firstly, I try to get to know how to use pygame module. I'm just going with docs and tutorial from www.pygame.org.
