@@ -16,6 +16,8 @@ class Square:
         self.width = width
         self.height = height
         self.speed = speed
+
+
     def get_values(self):
         return [self.x, self.y, self.width, self.height]
 
@@ -24,18 +26,35 @@ class Square:
         self.y += speed[1]
 
     def only_in_screen(self):
-        if self.x < 0 or self.x+self.width > screen_width:
+        if self.x < 0 or self.x + self.width > screen_width:
             self.speed[0] = -self.speed[0]
-        if self.y < 0 or self.y +self.height > screen_height:
+        if self.y < 0 or self.y + self.height > screen_height:
             self.speed[1] = -self.speed[1]
+
+    def change_x_speed(self):
+        self.speed[0] = -self.speed[0]
+
+    def change_y_speed(self):
+        self.speed[1] = -self.speed[1]
+
+
+    def collision(self, other):
+        if other.x == (self.x + self.width):
+            print([other.x, self.x + self.width])
+            return True
+        if (other.x + other.width) == self.x:
+            print([self.x, other.x + other.width])
+            return True
+        return False
+
+
 
 
 # Square 1
-square_1 = Square(75, 75, 100, 100, [2, 3])
+square_1 = Square(0, 500, 100, 100, [-4, 0])
 
 # Square 2
-square_2 = Square(690, 500, 150, 150, [4, 8])
-
+square_2 = Square(500, 500, 150, 150, [4, 0])
 
 while True:
     clock.tick(60)
@@ -44,6 +63,13 @@ while True:
             sys.exit()
     square_1.only_in_screen()
     square_2.only_in_screen()
+
+    if square_1.collision(square_2):
+        square_1.change_x_speed()
+        square_2.change_x_speed()
+
+
+
     square_1.accelerate(speed=square_1.speed)
     square_2.accelerate(speed=square_2.speed)
 
